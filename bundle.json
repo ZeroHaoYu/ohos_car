@@ -1,0 +1,39 @@
+{
+    "name": "@ohos/sensor_lite",		
+    "description": "Sensor services",		 
+    "version": "4.1",
+    "license": "MIT",
+    "publishAs": "code-segment",
+    "segment": {
+        "destPath": "mysample/ohos_car"
+    },
+    "dirs": {},
+    "scripts": {},
+    "licensePath": "COPYING",
+    "component": {			                
+        "name": "ohos_car",			  
+        "subsystem": "mysample",		     
+        "syscap": [],				                       
+        "features": [],                                     
+        "adapted_system_type": [],		      
+        "rom": "",           
+        "ram": "",               
+        "deps": {                      
+            "components": [
+                "c_utils",
+                "hilog",
+                "ace_napi"
+            ],
+            "third_party": [
+                "opencv"
+            ]   
+        },
+        "build": {				  
+            "sub_component": [
+                "//mysample/ohos_car:app"
+            ],			            
+            "inner_kits": [],		
+            "test": []				
+        }
+    }
+ }

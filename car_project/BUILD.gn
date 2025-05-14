@@ -1,0 +1,17 @@
+import("//build/ohos.gni")
+import("//build/ohos/ndk/ndk.gni")
+
+ohos_executable("car_project"){
+    output_name = "car_project"
+    sources = [
+        "main.c",
+        "controller.c",
+        "mode.c",
+        "pthread_usr.c",
+        "serial_base.c",
+        "serial_protocol.c",
+        "serial.c",
+        "wit_c_sdk.c"
+    ]
+    part_name = "ohos_car"
+}

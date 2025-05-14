@@ -1,0 +1,17 @@
+import("//build/ohos.gni")      
+import("//build/ohos/ndk/ndk.gni")
+group("app") {
+  deps = [
+        "rk3588_gpio:gpio_test",
+        "rk3588_pwm:pwm_test",
+        "rk3588_uart:uart_test",
+        "rk3588_camera:camera_test",
+        #"camera_server:opencv_camera",
+        "rk3588_ldlidar:ldlidar_demo",
+        "rk3588_tcp_client:tcp_client",
+        "rk3588_tcp_server:tcp_server",
+        "rk3588_imu:imu_test",
+        "rk3588_i2c:i2c_test",
+        "oh_car:test_serial"
+    ] 
+}

@@ -1,0 +1,93 @@
+import("//build/ohos.gni")
+import("//build/ohos/ndk/ndk.gni")
+
+config("lib_config") {
+    cflags_cc = [
+        "-frtti",  #
+        "-fexceptions",
+        "-DCVAPI_EXPORTS",
+        "-DOPENCV_ALLOCATOR_STATS_COUNTER_TYPE=int",
+        "-D_USE_MATH_DEFINES",
+        "-D__OPENCV_BUILD=1",
+        "-D__STDC_CONSTANT_MACROS",
+        "-D__STDC_FORMAT_MACROS",
+        "-D__STDC_LIMIT_MACROS",
+        "-O2",
+        "-Wno-error=header-hygiene",
+    ]
+}
+source_set("my_lib") {
+  sources = [
+    "//mysubsys/mysample/RKNN_demo/main.cc"
+  ]
+
+  include_dirs = [
+    "//mysubsys/mysample/RKNN_demo/rknn/runtime/Linux/librknn_api/include"
+  ]
+
+  libs = [
+    "//mysubsys/mysample/RKNN_demo/rknn/lib/librknnrt.so"
+  ]
+}
+ohos_executable("opencv_camera") {
+  output_name = "yolov5_server"
+  include_dirs = [
+    "include",
+    "//foundation/ace/napi/interfaces/kits",
+    "//third_party/opencv/include",
+    "//third_party/opencv/common",
+    "//third_party/opencv/modules/core/include",
+    "//third_party/opencv/modules/highgui/include",
+    "//third_party/opencv/modules/imgcodecs/include",
+    "//third_party/opencv/modules/imgproc/include",
+    "//third_party/opencv/modules/calib3d/include",
+    "//third_party/opencv/modules/dnn/include",
+    "//third_party/opencv/modules/features2d/include",
+    "//third_party/opencv/modules/flann/include",
+    "//third_party/opencv/modules/ts/include",
+    "//third_party/opencv/modules/video/include",
+    "//third_party/opencv/modules/videoio/include",
+    "//third_party/opencv/modules/ml/include",
+    "//third_party/opencv/modules/objdetect/include",
+    "//third_party/opencv/modules/photo/include",
+    "//third_party/opencv/modules/stitching/include",
+    "//third_party/opencv/build/opencv2",
+    "//third_party/opencv/build",
+
+  ]
+
+  sources = [
+    "src/server.cc",
+    "src/preprocess.cc",
+    "src/postprocess.cc"
+  ]
+
+  deps = [
+    "//third_party/opencv:opencv",
+    #"//hdf_core:hdf_core"
+    #"//foundation/arkui/napi:ace_napi",
+    #"//drivers/hdf_core/adapter/uhdf2/platform:libhdf_platform"
+  ]
+  deps += [ ":my_lib" ]
+
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+    "hdf_core:libhdf_utils",
+  ]
+  
+  libs = [
+    "//mysubsys/mysample/RKNN_demo/rknn/lib:rknnrt"
+  ]
+  configs = [
+    ":lib_config"
+  ]
+
+  relative_install_dir = "module"
+  part_name = "mysample"
+  install_enable = true
+  install_images = [ "system" ]
+}
+
+
+
