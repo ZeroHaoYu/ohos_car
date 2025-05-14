@@ -1,0 +1,36 @@
+import("//build/ohos.gni")
+import("//build/ohos/ndk/ndk.gni")
+
+config("warns") {
+  cflags = [ 
+    "-Wno-sign-compare",
+    "-Wno-unused-parameter", 
+    ]
+}
+
+ohos_executable("ldlidar_demo") {
+  install_enable = true
+  output_name = "ldlidar_demo"
+  sources = [
+    "demo.cpp",
+    "src/core/ldlidar_driver.cpp",
+    "src/dataprocess/lipkg.cpp",
+    "src/filter/tofbf.cpp",
+    "src/serialcom/serial_interface_linux.cpp",
+  ]
+  include_dirs = [ 
+    "//commonlibrary/c_utils/base/include",
+    "include/core",
+    "include/dataprocess",
+    "include/filter",
+    "include/serialcom",
+  ]
+  configs = [ ":warns" ]
+  external_deps = [
+    "c_utils:utils",
+    #"hiviewdfx_hilog_native:libhilog",
+  ]
+
+  install_images = [ "system" ]
+  part_name = "ohos_car"
+}

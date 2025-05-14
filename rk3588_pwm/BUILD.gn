@@ -1,0 +1,20 @@
+import("//build/ohos.gni")
+import("//build/ohos/ndk/ndk.gni")
+
+ohos_executable("pwm_test") {
+  output_name = "pwm_test"
+  sources = [
+    "um_pwm.c",
+    "main.c",
+  ]
+
+  include_dirs = [ 
+    "//commonlibrary/c_utils/base/include"
+    ]
+
+  external_deps = [
+    "c_utils:utils",
+    "hilog:libhilog",
+  ]
+  part_name = "ohos_car"
+}

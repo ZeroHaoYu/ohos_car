@@ -1,0 +1,24 @@
+import("//build/ohos.gni")
+import("//build/ohos/ndk/ndk.gni")
+
+config("warns") {
+  cflags = [ "-Werror" ]
+}
+
+ohos_executable("tcp_server") {
+  install_enable = true
+  output_name = "tcp_server"
+  sources = [
+    "server.c",
+  ]
+  include_dirs = [ 
+    "//commonlibrary/c_utils/base/include",
+   ]
+  configs = [ ":warns" ]
+  external_deps = [
+    "c_utils:utils",
+  ]
+
+  install_images = [ "system" ]
+  part_name = "ohos_car"
+}

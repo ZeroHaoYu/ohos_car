@@ -1,0 +1,25 @@
+import("//build/ohos.gni")
+import("//build/ohos/ndk/ndk.gni")
+
+config("warns") {
+  cflags = [ "-Werror" ]
+}
+
+ohos_executable("imu_test") {
+  install_enable = true
+
+  sources = [
+    "main.c",
+    "serial.c",
+    "wit_c_sdk.c"
+  ]
+  include_dirs = [ "//commonlibrary/c_utils/base/include" ]
+  configs = [ ":warns" ]
+  external_deps = [
+    "c_utils:utils",
+    #"hiviewdfx_hilog_native:libhilog",
+  ]
+
+  install_images = [ "system" ]
+  part_name = "ohos_car"
+}
